@@ -1,0 +1,8 @@
+ansible
+black
+click
+invoke
+jinja2-cli
+meson
+pytest
+tox
