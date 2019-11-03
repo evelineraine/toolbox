@@ -17,4 +17,5 @@ rpmdevtools
 rpmlint
 skopeo
 strace
+tmux
 vim
