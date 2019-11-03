@@ -41,8 +41,8 @@ buildah config \
     --annotation org.opencontainers.image.description="Official Toolbox image, plus custom software & configs installed" \
     $container
 
-buildah commit $container $NAME:$snapshot
-image=$(buildah commit --rm $container $NAME:$version)
+image=$(buildah commit --rm $container $NAME:$snapshot)
+buildah tag $image $NAME:$version
 
 mkdir -p $builddir
 buildah push $image oci-archive:$builddir/$NAME_DASH-$version.tar:$version
