@@ -45,5 +45,5 @@ image=$(buildah commit --rm $container $NAME:$snapshot)
 buildah tag $image $NAME:$version
 
 mkdir -p $builddir
-buildah push $image oci-archive:$builddir/$NAME_DASH-$version.tar:$version
 buildah push $image oci-archive:$builddir/$NAME_DASH-$snapshot.tar:$snapshot
+ln -srf $builddir/$NAME_DASH-$snapshot.tar $builddir/$NAME_DASH-$version.tar
