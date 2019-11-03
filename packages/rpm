@@ -2,6 +2,7 @@ buildah
 dnf-utils
 gcc
 gdb
+hub
 iproute
 jq
 kubectl
