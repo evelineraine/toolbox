@@ -1,3 +1,5 @@
+ansible
+ansible-doc
 buildah
 dnf-utils
 gcc
