@@ -13,6 +13,7 @@ mock
 podman
 python38
 python3-ansible-lint
+python3-argcomplete
 python3-devel
 redhat-rpm-config
 rpm-build

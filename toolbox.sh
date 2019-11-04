@@ -22,6 +22,9 @@ buildah run $container -- pip --no-cache-dir --disable-pip-version-check install
 
 buildah run $container -- dnf clean all
 
+# Activate Python argcomplete BASH completion
+buildah run $container -- activate-global-python-argcomplete
+
 # Container-specific ENV variables
 # Run nested buildah without cgroup isolation (the only way to do it)
 buildah config --env BUILDAH_ISOLATION=chroot $container
