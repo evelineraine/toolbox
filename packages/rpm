@@ -12,7 +12,6 @@ langpacks-en
 make
 mock
 podman
-python38
 python-ansible-lint
 python-argcomplete
 python-devel
