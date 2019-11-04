@@ -12,10 +12,9 @@ langpacks-en
 make
 mock
 podman
-python38
-python3-ansible-lint
-python3-argcomplete
-python3-devel
+python-ansible-lint
+python-argcomplete
+python-devel
 redhat-rpm-config
 rpm-build
 rpmdevtools
