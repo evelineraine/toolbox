@@ -3,7 +3,7 @@
 # ENV varaiables
 version=${version:-"draft"}
 sha=${sha:-""}
-snapshot="$(date +%Y%m%d%H%M%S)${sha:+git$sha}"
+snapshot="$(date --utc +%Y%m%d%H%M%S)${sha:+git$sha}"
 builddir=${builddir:-"./build"}
 
 # Constants
@@ -31,7 +31,7 @@ buildah config \
     --created-by "buildah" \
     --label maintainer="$AUTHOR" \
     --label version="$version" \
-    --annotation org.opencontainers.image.created="$(date --rfc-3339=seconds)" \
+    --annotation org.opencontainers.image.created="$(date --utc --rfc-3339=seconds)" \
     --annotation org.opencontainers.image.authors="$AUTHOR" \
     --annotation org.opencontainers.image.url="https://github.com/evelineraine/toolbox/blob/master/README.md" \
     --annotation org.opencontainers.image.source="https://github.com/evelineraine/toolbox" \
