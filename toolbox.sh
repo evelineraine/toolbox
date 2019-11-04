@@ -13,6 +13,7 @@ AUTHOR="Eveline Raine <eveline@raine.ai>"
 
 container=$(buildah from registry.fedoraproject.org/f31/fedora-toolbox)
 
+buildah copy $container locale.conf /etc/
 buildah copy $container kubernetes.repo /etc/yum.repos.d/
 
 buildah run $container -- dnf upgrade -y
