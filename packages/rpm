@@ -2,6 +2,8 @@ ansible
 ansible-doc
 buildah
 dnf-utils
+fuse
+fuse-libs
 gcc
 gdb
 hub
