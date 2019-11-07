@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
+# Constants
+NAME="evelineraine/toolbox"
+NAME_DASH=${NAME//\//-}
+AUTHOR="Eveline Raine <eveline@raine.ai>"
+
 # ENV varaiables
 version=${version:-"draft"}
 sha=${sha:-""}
 snapshot="$(date --utc +%Y%m%d%H%M%S)${sha:+git$sha}"
 builddir=${builddir:-"./build"}
-
-# Constants
-NAME="evelineraine/toolbox"
-NAME_DASH=${NAME//\//-}
-AUTHOR="Eveline Raine <eveline@raine.ai>"
 
 container=$(buildah from registry.fedoraproject.org/f31/fedora-toolbox)
 
