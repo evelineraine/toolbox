@@ -16,7 +16,6 @@ container=$(buildah from registry.fedoraproject.org/f31/fedora-toolbox)
 buildah copy $container locale.conf /etc/
 buildah copy $container kubernetes.repo /etc/yum.repos.d/
 
-buildah run $container -- dnf upgrade -y
 buildah run $container -- dnf install -y $(cat packages/rpm)
 buildah run $container -- pip --no-cache-dir --disable-pip-version-check install $(cat packages/pip)
 
