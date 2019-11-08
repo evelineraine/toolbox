@@ -1,34 +1,40 @@
 #!/usr/bin/env sh
 
+# Constants
+NAME="evelineraine/toolbox"
+NAME_DASH=${NAME//\//-}
+AUTHOR="Eveline Raine <eveline@raine.ai>"
+
 # ENV varaiables
 version=${version:-"draft"}
 sha=${sha:-""}
 snapshot="$(date --utc +%Y%m%d%H%M%S)${sha:+git$sha}"
 builddir=${builddir:-"./build"}
 
-# Constants
-NAME="evelineraine/toolbox"
-NAME_DASH=${NAME//\//-}
-AUTHOR="Eveline Raine <eveline@raine.ai>"
-
 container=$(buildah from registry.fedoraproject.org/f31/fedora-toolbox)
 
 buildah copy $container locale.conf /etc/
+
+# Google Cloud Kubernetes repo
+# See: kubernetes.io/docs/tasks/tools/install-kubectl/#install-using-native-package-management
 buildah copy $container kubernetes.repo /etc/yum.repos.d/
 
-buildah run $container -- dnf upgrade -y
 buildah run $container -- dnf install -y $(cat packages/rpm)
 buildah run $container -- pip --no-cache-dir --disable-pip-version-check install $(cat packages/pip)
 
 buildah run $container -- dnf clean all
 
 # Activate Python argcomplete BASH completion
+# See: docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#shell-completion
 buildah run $container -- activate-global-python-argcomplete
 
 # Container-specific ENV variables
 # Run nested buildah without cgroup isolation (the only way to do it)
+# See: github.com/containers/buildah/blob/master/contrib/docker/Dockerfile
 buildah config --env BUILDAH_ISOLATION=chroot $container
 
+# See: github.com/opencontainers/image-spec/blob/master/annotations.md
+# See: github.com/opencontainers/image-spec/blob/master/conversion.md#annotation-fields
 buildah config \
     --author "$AUTHOR" \
     --created-by "buildah" \
