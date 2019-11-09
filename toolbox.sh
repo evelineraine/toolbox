@@ -27,6 +27,14 @@ buildah run $container -- pip --no-cache-dir --disable-pip-version-check install
 
 buildah run $container -- dnf clean all
 
+# Install Neovim
+# See: github.com/neovim/neovim/wiki/Installing-Neovim
+buildah run $container -- alternatives \
+    --install /usr/bin/vi vi /usr/bin/nvim 2505 \
+    --slave /usr/share/man/man1/vi.1.gz vi-man /usr/share/man/man1/nvim.1.gz \
+    --slave /usr/bin/view view /usr/bin/nvim \
+    --slave /usr/bin/editor editor /usr/bin/nvim
+
 # Activate Python argcomplete BASH completion
 # See: docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#shell-completion
 buildah run $container -- activate-global-python-argcomplete

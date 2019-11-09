@@ -13,6 +13,7 @@ kubectl
 langpacks-en
 make
 mock
+neovim
 podman
 python-ansible-lint
 python-argcomplete
