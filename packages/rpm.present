@@ -2,6 +2,8 @@ ansible
 ansible-doc
 buildah
 dnf-utils
+fuse
+fuse-libs
 gcc
 gdb
 hub
@@ -11,6 +13,7 @@ kubectl
 langpacks-en
 make
 mock
+neovim
 podman
 python-ansible-lint
 python-argcomplete
@@ -22,4 +25,3 @@ rpmlint
 skopeo
 strace
 tmux
-vim

@@ -19,10 +19,21 @@ buildah copy $container locale.conf /etc/
 # See: kubernetes.io/docs/tasks/tools/install-kubectl/#install-using-native-package-management
 buildah copy $container kubernetes.repo /etc/yum.repos.d/
 
-buildah run $container -- dnf install -y $(cat packages/rpm)
+# Remove .absent packages first, and then exclude them when installing .present
+# Ensures there is an error if one of .present packages depends on a .absent one
+buildah run $container -- dnf remove -y $(cat packages/rpm.absent)
+buildah run $container -- dnf install --exclude="$(cat packages/rpm.absent)" -y $(cat packages/rpm.present)
 buildah run $container -- pip --no-cache-dir --disable-pip-version-check install $(cat packages/pip)
 
 buildah run $container -- dnf clean all
+
+# Install Neovim
+# See: github.com/neovim/neovim/wiki/Installing-Neovim
+buildah run $container -- alternatives \
+    --install /usr/bin/vi vi /usr/bin/nvim 2505 \
+    --slave /usr/share/man/man1/vi.1.gz vi-man /usr/share/man/man1/nvim.1.gz \
+    --slave /usr/bin/view view /usr/bin/nvim \
+    --slave /usr/bin/editor editor /usr/bin/nvim
 
 # Activate Python argcomplete BASH completion
 # See: docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#shell-completion
