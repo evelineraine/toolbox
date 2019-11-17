@@ -6,6 +6,7 @@ fuse
 fuse-libs
 gcc
 gdb
+git-review
 hub
 iproute
 jq
